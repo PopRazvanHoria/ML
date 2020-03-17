@@ -19,7 +19,7 @@ df = df[['Adj. Close','HL_PCT','PCT_change','Adj. Volume']]
 forecast_col = 'Adj. Close'
 df.fillna(-99999, inplace = True)
 
-forecast_out = int(math.ceil(0.01*len(df)))
+forecast_out = int(math.ceil(0.1*len(df)))
 
 df['label'] = df[forecast_col].shift(-forecast_out)
   
@@ -33,10 +33,10 @@ y = np.array(df['label'])
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.4)
 
-cls = LinearRegression()
-cls.fit(X_train, y_train)
-with open('linearregression.pickle','wb') as f:
-    pickle.dump(cls,f)
+#cls = LinearRegression()
+#cls.fit(X_train, y_train)
+#with open('linearregression.pickle','wb') as f:
+#    pickle.dump(cls,f)
 
 pickle_in = open('linearregression.pickle','rb')
 cls = pickle.load(pickle_in)
